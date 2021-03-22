@@ -1,4 +1,4 @@
-import { WelcomeMessageRegion } from './regions/welcome-message-region';
+import { WelcomeMessageRegion } from '../regions/welcome-message-region';
 
 export interface LandingPage {
   id: string;

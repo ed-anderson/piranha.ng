@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
-import { LandingPage } from 'src/app/core/models/landing-page';
+import { LandingPage } from 'src/app/core/models/pages/landing-page';
 import { CmsService } from 'src/app/core/services/cms/cms.service';
 
 @Component({

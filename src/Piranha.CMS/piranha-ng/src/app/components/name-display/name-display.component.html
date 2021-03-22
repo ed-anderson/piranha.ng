@@ -1,1 +1,22 @@
-<p>name-display works!</p>
+<ng-container *ngIf="data$ | async as data">
+  <div class="mb-3">
+    <label for="firstName" class="form-label">First Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="firstName"
+      [value]="data.regions.fullNameRegion.firstName.value"
+      disabled="true"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="lastName" class="form-label">Last Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="lastName"
+      [value]="data.regions.fullNameRegion.lastName.value"
+      disabled="true"
+    />
+  </div>
+</ng-container>

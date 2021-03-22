@@ -1,6 +1,6 @@
-import { StringValueField } from '../fields/string-value-field';
+import { StringField } from '../fields/string-field';
 
 export interface WelcomeMessageRegion {
-  welcomeMessage: StringValueField;
-  colour: StringValueField;
+  welcomeMessage: StringField;
+  colour: StringField;
 }
