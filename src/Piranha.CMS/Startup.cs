@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Piranha;
 using Piranha.AttributeBuilder;
 using Piranha.AspNetCore.Identity.SQLite;
 using Piranha.Data.EF.SQLite;
@@ -29,6 +29,11 @@ namespace Piranha.CMS
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => options.AddDefaultPolicy(builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            }));
+
             // Service setup
             services.AddPiranha(options =>
             {
@@ -41,24 +46,9 @@ namespace Piranha.CMS
                     db.UseSqlite(_config.GetConnectionString("piranha")));
                 options.UseIdentityWithSeed<IdentitySQLiteDb>(db =>
                     db.UseSqlite(_config.GetConnectionString("piranha")));
-
-                /**
-                 * Here you can configure the different permissions
-                 * that you want to use for securing content in the
-                 * application.
-                options.UseSecurity(o =>
-                {
-                    o.UsePermission("WebUser", "Web User");
-                });
-                 */
-
-                /**
-                 * Here you can specify the login url for the front end
-                 * application. This does not affect the login url of
-                 * the manager interface.
-                options.LoginUrl = "login";
-                 */
             });
+
+            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "piranha-ng/dist"; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +57,7 @@ namespace Piranha.CMS
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSpaStaticFiles();
             }
 
             // Initialize Piranha
@@ -81,11 +72,25 @@ namespace Piranha.CMS
             // Configure Tiny MCE
             EditorConfig.FromFile("editorconfig.json");
 
+            app.UseCors();
+
             // Middleware setup
-            app.UsePiranha(options => {
+            app.UsePiranha(options =>
+            {
                 options.UseManager();
                 options.UseTinyMCE();
                 options.UseIdentity();
+            });
+
+            // Set up SPA
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "piranha-ng";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer("start");
+                }
             });
         }
     }

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.4" />
     <PackageReference Include="Piranha" Version="9.0.0" />
     <PackageReference Include="Piranha.AspNetCore" Version="9.0.0" />
     <PackageReference Include="Piranha.AspNetCore.Identity.SQLite" Version="9.0.0" />
