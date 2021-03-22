@@ -13,6 +13,14 @@ export class CmsService {
 
   constructor(private httpClient: HttpClient) {}
 
+  getPageById(id: string): Observable<any> {
+    return this.httpClient.get(`${this._apiBaseUrl}/pages`, {
+      params: {
+        id,
+      },
+    });
+  }
+
   getSitemap(): Observable<Page[]> {
     return this.httpClient
       .get<PageResponse[]>(`${this._apiBaseUrl}/sitemap`)

@@ -1,1 +1,5 @@
-<p>landing-page works!</p>
+<ng-container *ngIf="data$ | async as data">
+  <h1 [ngStyle]="{ color: data.regions.welcomeMessageRegion.colour.value }">
+    {{ data.regions.welcomeMessageRegion.welcomeMessage.value }}
+  </h1>
+</ng-container>

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using Piranha.AttributeBuilder;
 using Piranha.AspNetCore.Identity.SQLite;
 using Piranha.Data.EF.SQLite;
@@ -39,7 +40,10 @@ namespace Piranha.CMS
             {
                 options.UseFileStorage(naming: Piranha.Local.FileStorageNaming.UniqueFolderNames);
                 options.UseImageSharp();
-                options.UseManager();
+                options.UseManager(jsonOptions =>
+                {
+                    jsonOptions.UseCamelCasing(true);
+                });
                 options.UseTinyMCE();
                 options.UseMemoryCache();
                 options.UseEF<SQLiteDb>(db =>
