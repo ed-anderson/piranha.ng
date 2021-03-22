@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { NameDisplayComponent } from './components/name-display/name-display.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { SelectedItemDisplayComponent } from './components/selected-item-display/selected-item-display.component';
 import { CoreModule } from './core/core.module';
@@ -13,10 +14,11 @@ import { RoutesProviderService } from './core/services/routes-provider/routes-pr
 @NgModule({
   declarations: [
     AppComponent,
-    NameDisplayComponent,
-    SelectedItemDisplayComponent,
     LandingPageComponent,
+    NameDisplayComponent,
+    NavbarComponent,
     PageNotFoundComponent,
+    SelectedItemDisplayComponent,
   ],
   imports: [BrowserModule, CoreModule, AppRoutingModule],
   providers: [
